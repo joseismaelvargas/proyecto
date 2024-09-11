@@ -1,12 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { useForm } from "react-hook-form"
+import List from './List';
 
 function Input() {
     
 const { register, handleSubmit ,formState:{errors}} = useForm();
-const [tareas,settarea]=useState([])
+
+let leer=JSON.parse(localStorage.getItem("TArealocal"))||[]
+const [tareas,settarea]=useState(leer)
+
+useEffect(()=>{
+localStorage.setItem("TArealocal",JSON.stringify(tareas))
+},[tareas])
+
 const agregar=(data,e)=>{
     e.preventDefault()
     let datos=data.tarea
@@ -14,6 +22,11 @@ const agregar=(data,e)=>{
 
     )
 
+}
+const borrarlist=(tare)=>{
+ const filtrar=tareas.filter((tarea)=>tarea!==tare )
+//  alert("DD")
+ settarea(filtrar)
 }
 console.log(tareas)
 
@@ -36,7 +49,15 @@ console.log(tareas)
         height:"60px"
       }}> Agregar Tarea</button>
       </Form>
+
+      {
+        tareas.map((tarea,index)=>(
+       <List tarea={tarea} key={index} borrar={borrarlist}></List>
+        )
+        )
+      }
     </>
+  
   );
 }
 

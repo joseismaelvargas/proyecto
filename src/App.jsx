@@ -1,11 +1,11 @@
 
-
+import Input from "./components/Input"
 function App() {
   
 
   return (
     <>
-      <h1>lista4 ojala se pueda</h1>
+      <Input></Input>
     </>
   )
 }

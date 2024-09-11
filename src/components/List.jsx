@@ -7,7 +7,7 @@ function List({tarea,key,borrar}) {
       <ListGroup.Item>{tarea} </ListGroup.Item>
     
      
-    </ListGroup>  <button onClick={()=>borrar(tarea)} className='btn btn-danger'>borrar</button>
+    </ListGroup>  <button onClick={()=>borrar(tarea)} className='btn btn-danger'>Borrar</button>
     </>
   );
 }

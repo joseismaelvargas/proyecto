@@ -6,7 +6,7 @@ import List from './List';
 
 function Input() {
     
-const { register, handleSubmit ,formState:{errors}} = useForm();
+const { register, handleSubmit ,formState:{errors},reset} = useForm();
 
 let leer=JSON.parse(localStorage.getItem("TArealocal"))||[]
 const [tareas,settarea]=useState(leer)
@@ -18,9 +18,8 @@ localStorage.setItem("TArealocal",JSON.stringify(tareas))
 const agregar=(data,e)=>{
     e.preventDefault()
     let datos=data.tarea
-    settarea([datos,...tareas]
-
-    )
+    settarea([datos,...tareas])
+    reset()
 
 }
 const borrarlist=(tare)=>{
@@ -36,10 +35,10 @@ console.log(tareas)
     <Form className='d-flex' onSubmit={handleSubmit(agregar)}>
     <FloatingLabel
         controlId="floatingInput"
-        label="Agrege Tarea"
+        label="Agregue"
         className="mb-3"
       >
-        <Form.Control type="text" placeholder="Agrege Tarea" style={{
+        <Form.Control type="text" placeholder="Agregue " style={{
             width:"400px"
         }} name='tarea' {...register("tarea")} />
       </FloatingLabel>
@@ -49,7 +48,8 @@ console.log(tareas)
         height:"60px"
       }}> Agregar Tarea</button>
       </Form>
-
+        <hr />
+        <h2 className='text-center '>Tareas</h2>
       {
         tareas.map((tarea,index)=>(
        <List tarea={tarea} key={index} borrar={borrarlist}></List>
